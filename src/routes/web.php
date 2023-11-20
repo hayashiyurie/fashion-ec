@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,14 @@ Route::get('/', function () {
 });
 
 Route::get('/hello', [HelloController::class, 'hello']);
+
+Route::get('/', function () {
+    return view('product');
+});
+Route::get('/product', [ProductController::class, 'product']);
+
+
+// Route::get('/storage/images/products', function () {
+//     // redirect関数にパスを指定する方法
+//     return redirect('/');
+// });
