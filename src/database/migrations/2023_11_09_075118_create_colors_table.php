@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('colors', function (Blueprint $table) {
             $table->id();
             $table->string('color_name')->comment('カラー名');
+            $table->dateTime('created_at')->nullable()->comment('登録日');
+            $table->dateTime('updated_at')->nullable()->comment('更新日');
+            $table->dateTime('deleted_at')->nullable()->comment('削除日');
         });
     }
 

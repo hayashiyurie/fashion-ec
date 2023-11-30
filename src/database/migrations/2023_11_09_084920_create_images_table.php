@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('path')->comment('パス');
-            $table->dateTime('signup_at')->comment('登録日');
-            $table->dateTime('updated_at')->comment('更新日');
-            $table->dateTime('deleted_at')->comment('削除日');
+            $table->dateTime('created_at')->nullable()->comment('登録日');
+            $table->dateTime('updated_at')->nullable()->comment('更新日');
+            $table->dateTime('deleted_at')->nullable()->comment('削除日');
         });
     }
 
