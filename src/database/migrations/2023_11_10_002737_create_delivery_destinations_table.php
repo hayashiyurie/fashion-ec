@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('destinations_name')->comment('宛名');
             $table->string('destinations_postcode')->comment('配送先郵便番号');
             $table->string('destinations_address')->comment('配送先住所');
-            $table->dateTime('signup_at')->comment('登録日');
-            $table->dateTime('updated_at')->comment('更新日');
+            $table->dateTime('created_at')->nullable()->comment('登録日');
+            $table->dateTime('updated_at')->nullable()->comment('更新日');
+            $table->dateTime('deleted_at')->nullable()->comment('削除日');
         });
     }
 

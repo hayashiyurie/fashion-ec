@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('tax_included_price')->comment('税込価格');
             $table->string('jan_code')->comment('janコード');
             $table->string('sku_code')->comment('skuコード');
-            $table->dateTime('signup_at')->comment('登録日');
-            $table->dateTime('updated_at')->comment('更新日');
-            $table->dateTime('deleted_at')->comment('削除日');
+            $table->dateTime('created_at')->nullable()->comment('登録日');
+            $table->dateTime('updated_at')->nullable()->comment('更新日');
+            $table->dateTime('deleted_at')->nullable()->comment('削除日');
         });
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\ProductController;
@@ -20,13 +21,8 @@ Route::get('/', function () {
 });
 
 Route::get('/hello', [HelloController::class, 'hello']);
-
-Route::get('/', function () {
-    return view('product');
-});
-Route::get('/product', [ProductController::class, 'product']);
-
-
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout']);
 // Route::get('/storage/images/products', function () {
 //     // redirect関数にパスを指定する方法
 //     return redirect('/');

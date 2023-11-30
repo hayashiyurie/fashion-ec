@@ -10,5 +10,4 @@ class size_genre extends Model
     use HasFactory;
 
     public $timestamps = false;
-    const CREATED_AT = 'signup_at';
 }
