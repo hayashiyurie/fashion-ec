@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Products_image;
@@ -13,11 +14,15 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $genreId = $request->genreId;
         //productsテーブルのproduct_idと一致するproducts_imageテーブルからproduct_idとimage_idを取得します。
-        $products = Product::with(['productImages.image', 'productInventoryManagement'])->get();
+        $products = Product::with(['productImages.image', 'productInventoryManagement'])
 
+            ->when($genreId, function ($query, $genreId) {
+                return $query->where('genre_id', '=', $genreId);
+            })->get();
 
         return response()->json([
             'products' => $products,

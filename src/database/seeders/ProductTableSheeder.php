@@ -38,14 +38,14 @@ class ProductTableSheeder extends Seeder
 
         $genreId = DB::table('genres')->insertGetId([
             'genre_name' => Str::random(10),
-            'signup_at' => new Carbon(),
+            'created_at' => new Carbon(),
             'updated_at' => new Carbon(),
             'deleted_at' => new Carbon(),
         ]);
 
         $imageId = DB::table('images')->insertGetId([
             'path' => "/images/products/knitBeige.png",
-            'signup_at' => new Carbon(),
+            'created_at' => new Carbon(),
             'updated_at' => new Carbon(),
             'deleted_at' => new Carbon(),
         ]);
@@ -59,7 +59,7 @@ class ProductTableSheeder extends Seeder
             'tax_included_price'  => '2200円',
             'jan_code'  => Str::random(10),
             'sku_code'  => Str::random(10),
-            'signup_at' => new DateTime(),
+            'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => new DateTime(),
         ]);
@@ -73,7 +73,7 @@ class ProductTableSheeder extends Seeder
         $product_inventory_managementID = DB::table('product_inventory_managements')->insertGetId([
             'product_id' => $productId,
             'number_of_stock' => '25',
-            'signup_at' => new DateTime(),
+            'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             'deleted_at' => new DateTime(),
         ]);
