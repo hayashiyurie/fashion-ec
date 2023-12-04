@@ -7,5 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Genre extends Model
 {
-    use HasFactory;
+
+    protected $fillable = [
+        'genre_name'
+    ];
+
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 }
