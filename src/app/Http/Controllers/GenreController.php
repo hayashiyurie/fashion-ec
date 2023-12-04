@@ -9,6 +9,7 @@ class GenreController extends Controller
 {
     public function genre(Request $request)
     {
+
         return response()->json(['genres' => Genre::all()]);
     }
 }
