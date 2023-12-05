@@ -37,14 +37,14 @@ class ProductTableSheeder extends Seeder
         ]);
 
         $genreId = DB::table('genres')->insertGetId([
-            'genre_name' => Str::random(10),
+            'genre_name' => 'アウター',
             'created_at' => new Carbon(),
             'updated_at' => new Carbon(),
             'deleted_at' => new Carbon(),
         ]);
 
         $imageId = DB::table('images')->insertGetId([
-            'path' => "/images/products/knitBeige.png",
+            'path' => "/images/products/coatBrown.png",
             'created_at' => new Carbon(),
             'updated_at' => new Carbon(),
             'deleted_at' => new Carbon(),
@@ -54,9 +54,9 @@ class ProductTableSheeder extends Seeder
             'size_id' => $sizeId,
             'color_id' => $colorId,
             'genre_id' => $genreId,
-            'product_name' => Str::random(10),
+            'product_name' => 'ステンカラーコート',
             'explanation'  => Str::random(15),
-            'tax_included_price'  => '2200円',
+            'tax_included_price'  => '6000円',
             'jan_code'  => Str::random(10),
             'sku_code'  => Str::random(10),
             'created_at' => new DateTime(),
