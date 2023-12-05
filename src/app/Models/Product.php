@@ -37,4 +37,9 @@ class Product extends Model
         //Products_imageモデルのデータを取得する
         return $this->hasOne(Product_inventory_management::class);
     }
+    public function genre()
+    {
+        //Genreモデルのデータを取得する
+        return $this->belongsTo(Genre::class);
+    }
 }

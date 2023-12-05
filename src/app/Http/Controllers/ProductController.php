@@ -24,6 +24,7 @@ class ProductController extends Controller
                 return $query->where('genre_id', '=', $genreId);
             })->get();
 
+
         return response()->json([
             'products' => $products,
         ]);
@@ -57,9 +58,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $product = Product::with(['productImages.image', 'productInventoryManagement', 'genre'])
+            ->find($id);
+        return response()->json([
+            'product' => $product,
+        ]);
     }
 
     /**
