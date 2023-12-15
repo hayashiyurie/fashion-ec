@@ -13,6 +13,7 @@ class RegisterController extends Controller
 {
     public function register(Request $request)
     {
+        // \Log::info($request);
         $validatedData = $request->validate([
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
@@ -31,11 +32,6 @@ class RegisterController extends Controller
         return response()->json([
             'message' => 'success'
         ]);
-        // function failedValidation(Validator $validator)
-        // {
-        //     $response['errors']  = $validator->errors()->toArray();
-        //     throw new HttpResponseException(response()->json($response, 422));
-        // }
     }
 
     // public function store(Request $request)

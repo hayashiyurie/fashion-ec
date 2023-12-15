@@ -3,8 +3,11 @@
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\RegisterController;
+use App\Models\Customer;
 use App\Models\Genre;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -25,14 +28,13 @@ Route::group(['middleware' => 'api'], function () {
     // Route::middleware('auth')->group(function () {
     // });
     Route::middleware('auth:sanctum')->group(function () {
-        Route::controller(ProductController::class)->group(function () {
+        Route::prefix('mypage')->group(function () {
+            Route::post('/delivery_destination_register', [CustomerController::class, 'storeDeliveryDestination']);
         });
     });
     Route::get('/product', [ProductController::class, 'index']);
     Route::get('/product/show/{id}', [ProductController::class, 'show']);
     Route::get('/genre', [GenreController::class, 'genre']);
+    Route::get('/delivery_destination_list', [DeliveryController::class, 'deliveryDestinationList']);
     Route::post('/customer_register', [RegisterController::class, 'register']);
-    // Route::post('/me', [AuthController::class, 'me']);
-
-    // Route::get('hello', [HelloController::class, 'hello']);
 });

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products');
             $table->foreignId('order_id')->constrained('orders');
             $table->integer('number_of_products')->comment('商品の個数');
-            $table->string('tax_included_purchase_price')->comment('購入時価格(税込)');
+            $table->integer('tax_included_purchase_price')->comment('購入時価格(税込)');
             $table->string('order_product_status')->comment('注文商品ステータス');
             $table->dateTime('created_at')->nullable()->comment('登録日');
             $table->dateTime('updated_at')->nullable()->comment('更新日');
