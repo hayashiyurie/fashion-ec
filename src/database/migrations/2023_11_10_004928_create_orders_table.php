@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('postage')->comment('送料');
-            $table->string('billing_amount')->comment('請求額');
+            $table->integer('postage')->comment('送料');
+            $table->integer('billing_amount')->comment('請求額');
             $table->string('method_of_payment')->comment('支払い方法');
             $table->string('destinations_name')->comment('宛名');
             $table->string('destinations_postcode')->comment('配送先郵便番号');

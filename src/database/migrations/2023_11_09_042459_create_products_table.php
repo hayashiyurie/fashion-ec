@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('genre_id')->constrained('genres');
             $table->string('product_name')->comment('商品の名前');
             $table->string('explanation')->comment('説明');
-            $table->string('tax_included_price')->comment('税込価格');
+            $table->integer('tax_included_price')->comment('税込価格');
             $table->string('jan_code')->comment('janコード');
             $table->string('sku_code')->comment('skuコード');
             $table->dateTime('created_at')->nullable()->comment('登録日');

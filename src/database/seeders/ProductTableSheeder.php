@@ -44,7 +44,7 @@ class ProductTableSheeder extends Seeder
         ]);
 
         $imageId = DB::table('images')->insertGetId([
-            'path' => "/images/products/coatBrown.png",
+            'path' => "/images/products/coatBlack.png",
             'created_at' => new Carbon(),
             'updated_at' => new Carbon(),
             'deleted_at' => new Carbon(),
@@ -56,7 +56,7 @@ class ProductTableSheeder extends Seeder
             'genre_id' => $genreId,
             'product_name' => 'ステンカラーコート',
             'explanation'  => Str::random(15),
-            'tax_included_price'  => '6000円',
+            'tax_included_price'  => 6000,
             'jan_code'  => Str::random(10),
             'sku_code'  => Str::random(10),
             'created_at' => new DateTime(),
