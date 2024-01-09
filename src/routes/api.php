@@ -6,9 +6,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DeliveryController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Customer;
 use App\Models\Genre;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +39,5 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('/genre', [GenreController::class, 'genre']);
     Route::get('/delivery_destination_list', [DeliveryController::class, 'deliveryDestinationList']);
     Route::post('/customer_register', [RegisterController::class, 'register']);
+    Route::post('/order', [OrderController::class, 'order']);
 });
