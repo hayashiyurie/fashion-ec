@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Delivery_destination;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Stripe\StripeClient;
 use Stripe\PaymentIntent;
 
@@ -19,19 +22,24 @@ class OrderController extends Controller
 
     public function order(Request $request)
     {
-        // return response()->json(['orders' => Order::all()]);
-
         $paymentMethodId = $request->input('payment_method_id');
         $amount = $request->input('amount');
+        $deliveryDestinationId = $request->input('delivery_destination_id');
 
         // StripeのPaymentIntentを作成して支払いを確定させる
         $paymentIntent = $this->stripe->paymentIntents->create([
             'amount' => $amount,
             'currency' => 'JPY',
             'payment_method' => $paymentMethodId,
-            'confirmation_method' => 'manual',
-            'confirm' => true,
+            // 'confirmation_method' => 'manual',
+            // 'confirm' => true,
+            'automatic_payment_methods' => [
+                'enabled' => true,
+                'allow_redirects' => 'never',
+            ],
         ]);
+        $paymentIntent->confirm();
+
 
         // 支払いが成功した場合
         if ($paymentIntent->status === 'succeeded') {
@@ -39,25 +47,28 @@ class OrderController extends Controller
             $validatedData = $request->validate([
                 'products' => 'required'
             ]);
-            Order::create([
-                'postage' => $validatedData['postage'],
-                'billing_amount' => $validatedData['billing_amount'],
-                'method_of_payment' => $validatedData['method_of_payment'],
-                'destinations_name' => $validatedData['destinations_name'],
-                'destinations_postcode' => $validatedData['destinations_postcode'],
-                'destinations_address' => $validatedData['destinations_address'],
-                'order_status' => $validatedData['order_status']
-            ]);
-            foreach ($validatedData['products'] as $product) {
-                OrderProduct::create([
-                    'product_id' => $validatedData['product_id'],
-                    'order_id' => $validatedData['order_id'],
-                    'number_of_products' => $validatedData['number_of_products'],
-                    'tax_included_purchase_price' => $validatedData['tax_included_purchase_price'],
-                    'order_product_status' => $validatedData['order_product_statu']
-                ]);
-            }
-            // Order::create($paymentIntent->status);
+            $deliveryDestination = Delivery_destination::find($deliveryDestinationId);
+            DB::transaction(function () use ($amount, $deliveryDestination, $validatedData) {
+                $order = new Order;
+                $order->fill([
+                    'postage' => 400, //TODO: 商品毎の送料を使うようにする
+                    'billing_amount' => $amount,
+                    'method_of_payment' => 'card',
+                    'destinations_name' => $deliveryDestination->destinations_name,
+                    'destinations_postcode' => $deliveryDestination->destinations_postcode,
+                    'destinations_address' => $deliveryDestination->destinations_postcode,
+                    'order_status' => '配送準備中'
+                ])->save();
+                foreach ($validatedData['products'] as $product) {
+                    OrderProduct::create([
+                        'product_id' => $product['product_id'],
+                        'order_id' => $order->id,
+                        'number_of_products' => $product['quantity'],
+                        'tax_included_purchase_price' => $product['sum_price'],
+                        'order_product_status' =>  '配送準備中' // TODO: コード値で持たせる方がいい？
+                    ]);
+                }
+            });
             return response()->json(['success' => true, 'message' => 'Payment succeeded']);
         } else {
             return response()->json(['success' => false, 'message' => 'Payment failed']);

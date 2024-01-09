@@ -33,11 +33,11 @@ Route::group(['middleware' => 'api'], function () {
         Route::prefix('mypage')->group(function () {
             Route::post('/delivery_destination_register', [CustomerController::class, 'storeDeliveryDestination']);
         });
+        Route::post('/order', [OrderController::class, 'order']);
     });
     Route::get('/product', [ProductController::class, 'index']);
     Route::get('/product/show/{id}', [ProductController::class, 'show']);
     Route::get('/genre', [GenreController::class, 'genre']);
     Route::get('/delivery_destination_list', [DeliveryController::class, 'deliveryDestinationList']);
     Route::post('/customer_register', [RegisterController::class, 'register']);
-    Route::post('/order', [OrderController::class, 'order']);
 });
