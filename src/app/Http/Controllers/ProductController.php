@@ -82,4 +82,15 @@ class ProductController extends Controller
     {
         //
     }
+
+    /**
+     * 新商品8件取得
+     */
+    public function searchNewProducts(Request $request)
+    {
+        $newProducts = Product::with(['productImages.image', 'productInventoryManagement'])->orderBy('id', 'DESC')->take(8)->get();
+        return response()->json([
+            'new_products' => $newProducts,
+        ]);
+    }
 }
