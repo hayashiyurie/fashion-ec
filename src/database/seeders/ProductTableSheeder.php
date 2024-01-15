@@ -33,7 +33,7 @@ class ProductTableSheeder extends Seeder
         ]);
 
         $colorId = DB::table('colors')->insertGetId([
-            'color_name' => Str::random(10)
+            'color_name' => 'Green'
         ]);
 
         $genreId = DB::table('genres')->insertGetId([
@@ -44,7 +44,7 @@ class ProductTableSheeder extends Seeder
         ]);
 
         $imageId = DB::table('images')->insertGetId([
-            'path' => "/images/products/coatBlack.png",
+            'path' => "/images/products/JacketGreen.png",
             'created_at' => new Carbon(),
             'updated_at' => new Carbon(),
             'deleted_at' => new Carbon(),
@@ -54,9 +54,9 @@ class ProductTableSheeder extends Seeder
             'size_id' => $sizeId,
             'color_id' => $colorId,
             'genre_id' => $genreId,
-            'product_name' => 'ステンカラーコート',
+            'product_name' => 'リバーシブルハーフジップナイロンボアブルゾン',
             'explanation'  => Str::random(15),
-            'tax_included_price'  => 6000,
+            'tax_included_price'  => 4500,
             'jan_code'  => Str::random(10),
             'sku_code'  => Str::random(10),
             'created_at' => new DateTime(),
