@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Stripe\StripeClient;
 use Stripe\PaymentIntent;
+use App\Models\Products_image;
+use App\Models\Image;
 
 class OrderController extends Controller
 {
@@ -56,7 +58,7 @@ class OrderController extends Controller
                     'method_of_payment' => 'card',
                     'destinations_name' => $deliveryDestination->destinations_name,
                     'destinations_postcode' => $deliveryDestination->destinations_postcode,
-                    'destinations_address' => $deliveryDestination->destinations_postcode,
+                    'destinations_address' => $deliveryDestination->destinations_address,
                     'order_status' => '配送準備中'
                 ])->save();
                 foreach ($validatedData['products'] as $product) {

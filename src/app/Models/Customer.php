@@ -18,9 +18,6 @@ class Customer extends Authenticatable
         'phone_number',
         'email',
         'password'
-
-
-
     ];
 
     protected $guarded = [
@@ -28,4 +25,10 @@ class Customer extends Authenticatable
         'updated_at',
         'deleted_at'
     ];
+
+    public function order()
+    {
+        //orderモデルのデータを取得する
+        return $this->hasMany(Order::class, 'customer_id');
+    }
 }

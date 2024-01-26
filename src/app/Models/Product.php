@@ -42,4 +42,24 @@ class Product extends Model
         //Genreモデルのデータを取得する
         return $this->belongsTo(Genre::class);
     }
+    // public function DeliveryDestination()
+    // {
+    //     //Delivery_destinstionモデルのデータを取得する
+    //     return $this->belongsTo(Delivery_destination::class);
+    // }
+    // public function customer()
+    // {
+    //     //customerモデルのデータを取得する
+    //     return $this->belongsTo(Customer::class);
+    // }
+    // public function order()
+    // {
+    //     //Ordersモデルのデータを取得する
+    //     return $this->belongsTo(Order::class);
+    // }
+    public function orderProduct()
+    {
+        //orderProductsモデルのデータを取得する
+        return $this->hasOne(OrderProduct::class);
+    }
 }
