@@ -41,7 +41,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('/product/show/{id}', [ProductController::class, 'show']);
     Route::get('/product/newlist', [ProductController::class, 'searchNewProducts']);
     Route::get('/order/history', [OrderHistoryController::class, 'orderHistory']);
-    Route::get('/order/historyDetails/{id}', [OrderHistoryController::class, 'searchHistoryDetails']);
+    Route::get('/orderHistory/details/{id}', [OrderHistoryController::class, 'searchHistoryDetails']);
     Route::get('/genre', [GenreController::class, 'genre']);
     Route::get('/delivery_destination_list', [DeliveryController::class, 'deliveryDestinationList']);
     Route::post('/customer_register', [RegisterController::class, 'register']);

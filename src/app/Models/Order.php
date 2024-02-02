@@ -49,7 +49,7 @@ class Order extends Model
         //orderProductsモデルのデータを取得する
         return $this->hasMany(OrderProduct::class);
     }
-    public function DeliveryDestination()
+    public function deliveryDestination()
     {
         //Delivery_destinstionモデルのデータを取得する
         return $this->belongsTo(Delivery_destination::class);

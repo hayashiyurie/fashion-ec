@@ -19,4 +19,10 @@ class Delivery_destination extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function customer()
+    {
+        //customerモデルのデータを取得する
+        return $this->belongsTo(Customer::class);
+    }
 }

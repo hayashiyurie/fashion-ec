@@ -33,20 +33,16 @@ class OrderHistoryController extends Controller
      */
     public function searchHistoryDetails(Request $request, $id)
     {
-        $orderId = $request->orderId;
-        $order = Order::with(['customer', 'deliveryDestination'])
-            ->when($orderId, function ($query, $orderId) {
-                return $query->where('order_id', '=', $orderId);
-            })->find($id);
 
-        $orderId = $request->OrderId;
+        $order = Order::with(['customer'])->find($id);
+
         $orderProducts = OrderProduct::with(['product.productImages.image'])
-            ->when($orderId, function ($query, $orderId) {
-                return $query->where('order_id', '=', $orderId);
+            ->when($id, function ($query, $id) {
+                return $query->where('order_id', '=', $id);
             })->get();
 
         return response()->json([
-            'order' => $order,
+            'orderDetail' => $order,
             'orderProducts' => $orderProducts
         ]);
     }
